@@ -1,0 +1,40 @@
+{
+  "name": "bootstrap-cascade-layers",
+  "version": "1.0.0",
+  "description": "Under Development......",
+  "homepage": "https://github.com/iamRahulKumarr/bootstrap-cascade-layers#readme",
+  "bugs": {
+    "url": "https://github.com/iamRahulKumarr/bootstrap-cascade-layers/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamRahulKumarr/bootstrap-cascade-layers.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "webpack.config.js",
+  "scripts": {
+    "watch": "webpack --watch --mode=development"
+  },
+  "devDependencies": {
+    "babel-loader": "^10.0.0",
+    "browserslist": "^4.26.3",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.2",
+    "lightningcss": "^1.30.2",
+    "mini-css-extract-plugin": "^2.9.4",
+    "postcss": "^8.5.6",
+    "sass": "^1.93.2",
+    "sass-loader": "^16.0.5",
+    "stylelint": "^16.25.0",
+    "stylelint-config-clean-order": "^7.0.0",
+    "stylelint-config-sass-guidelines": "^12.1.0",
+    "stylelint-config-standard-scss": "^16.0.0",
+    "stylelint-no-unsupported-browser-features": "^8.0.5",
+    "stylelint-order": "^6.0.4",
+    "webpack": "^5.102.1",
+    "webpack-bundle-analyzer": "^4.10.2",
+    "webpack-cli": "^6.0.1"
+  }
+}
