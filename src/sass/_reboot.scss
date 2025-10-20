@@ -5,7 +5,7 @@
 * styles targeting irrelevant browsers while applying new styles. 
 */
 
-@layer bs-reboot {
+
   *,
   *::before,
   *::after {
@@ -105,4 +105,3 @@
   :target {
     scroll-margin-block: 5ex;
   }
-}
