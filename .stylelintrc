@@ -1,7 +1,12 @@
 {
   "extends": ["stylelint-config-standard-scss", "stylelint-config-clean-order"],
+  "reportInvalidScopeDisables": true,
+  "reportNeedlessDisables": true,
     "ignoreFiles": [
     "node_modules/**/*.css",
     "dist/**/*.css"
-  ]
+  ],
+  "rules": {
+   "scss/dollar-variable-empty-line-before": null
+  }
 }
