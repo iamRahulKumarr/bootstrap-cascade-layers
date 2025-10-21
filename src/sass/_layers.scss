@@ -1,0 +1,11 @@
+@use "sass:meta";
+
+@layer bs-root, bs-reboot;
+
+@layer bs-root {
+  @include meta.load-css("root");
+}
+
+@layer bs-reboot {
+  @include meta.load-css("reboot");
+}

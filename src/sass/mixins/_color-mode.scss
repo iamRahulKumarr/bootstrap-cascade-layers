@@ -1,0 +1,23 @@
+// stylelint-disable
+@use '../variables/variables' as var;
+
+// color-mode-mixin
+@mixin color-mode($mode: light, $root: false) {
+  @if var.$color-mode-type == "media-query" {
+    @if $root == true {
+      @media (prefers-color-scheme: $mode) {
+        :root {
+          @content;
+        }
+      }
+    } @else {
+      @media (prefers-color-scheme: $mode) {
+        @content;
+      }
+    }
+  } @else {
+    [data-bs-theme="#{$mode}"] {
+      @content;
+    }
+  }
+}
