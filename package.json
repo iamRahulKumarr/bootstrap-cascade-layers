@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-cascade-layers",
   "version": "1.0.0",
-  "description": "Under Development......",
+  "description": "An early-stage attempt to modernize Bootstrap with SASS Modules and CSS features. Not stable yet, but heading somewhere good.",
   "homepage": "https://github.com/iamRahulKumarr/bootstrap-cascade-layers#readme",
   "bugs": {
     "url": "https://github.com/iamRahulKumarr/bootstrap-cascade-layers/issues"
