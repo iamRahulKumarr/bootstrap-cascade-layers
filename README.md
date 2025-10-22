@@ -9,9 +9,4 @@ Bootstrap, but dragged kicking and screaming into 2025. We're talking:
 - **Modern CSS** - Custom properties, modern color functions, you know, the good stuff
 - **Powered by ⚡️LightningCSS**
 
-## Why Though?
-Because i was bored (jk lols)
-
-Plus, trying to override Bootstrap styles in 2025 shouldn't require a degree in CSS specificity warfare. 😉
-
 ## Under Active Development
