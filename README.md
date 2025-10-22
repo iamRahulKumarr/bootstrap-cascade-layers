@@ -1,7 +1,5 @@
 # Bootstrap Cascade Layers (will change the name)
 
-> Because `@import` is so 2015 💀
-
 ## What's This?
 
 Bootstrap, but dragged kicking and screaming into 2025. We're talking:
