@@ -1,0 +1,10 @@
+@use "sass:color";
+@use "sass:string";
+
+@function to-rgb($value) {
+    $red: color.channel($value, "red");
+    $green: color.channel($value, "green");
+    $blue: color.channel($value, "blue");
+
+    @return string.unquote("#{$red} #{$green} #{$blue}");
+}

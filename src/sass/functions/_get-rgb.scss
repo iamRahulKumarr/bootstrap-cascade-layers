@@ -1,0 +1,15 @@
+@use "sass:color";
+@use "sass:string";
+
+/* This is used to get the color code in rgb() */
+@function get-rgb($value, $opacity: 100%) {
+    $red: color.channel($value, "red");
+    $green: color.channel($value, "green");
+    $blue: color.channel($value, "blue");
+
+    @if $opacity < 100% {
+        @return string.unquote("rgb(#{$red} #{$green} #{$blue} / #{$opacity})");
+    }
+
+    @return string.unquote("rgb(#{$red} #{$green} #{$blue})");
+}
