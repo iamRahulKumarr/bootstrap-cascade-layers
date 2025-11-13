@@ -1,208 +1,202 @@
+/* stylelint-disable */
+
 @use "sass:meta";
 
-@use "vendor" as *;
-@use "config" as *;
-@use "variables" as *;
-@use "functions" as func;
-@use "maps" as maps;
+@use "functions/to-rgb" as *;
 @use "mixins/color-mode" as *;
+@use "variables" as *;
+@use "maps" as *;
+@use "vendor" as *;
 
 :root,
 [data-bs-theme="light"] {
-  // Fonts
-  // Note: Use `inspect` for lists so that quoted items keep the quotes.
-  // See https://github.com/sass/sass/issues/2383#issuecomment-336349172
-  --#{$prefix}font-sans-serif: #{meta.inspect($font-family-sans-serif)};
-  --#{$prefix}font-monospace: #{meta.inspect($font-family-monospace)};
-  --#{$prefix}gradient: #{$gradient};
+    /* Colors
 
-  // Colors
-  // Generate palettes for full colors, grays, and theme colors.
-  --#{$prefix}white-rgb: #{func.get-rgb($white)};
-  --#{$prefix}black-rgb: #{func.get-rgb($black)};
+    Generate palettes for full colors, grays, and theme colors.
+    */
 
-  // Root and body
-  // root-body-variables
-  @if $font-size-root {
-    --#{$prefix}root-font-size: #{$font-size-root};
-  }
+    @each $color, $value in $colors {
+        --#{$prefix}#{$color}: #{$value};
+    }
 
-  --#{$prefix}body-font-family: #{meta.inspect($font-family-base)};
+    @each $color, $value in $grays {
+        --#{$prefix}gray-#{$color}: #{$value};
+    }
 
-  @include rfs($font-size-base, --#{$prefix}body-font-size);
+    @each $color, $value in $theme-colors {
+        --#{$prefix}#{$color}: #{$value};
+    }
 
-  --#{$prefix}body-font-weight: #{$font-weight-base};
-  --#{$prefix}body-line-height: #{$line-height-base};
+    @each $color, $value in $theme-colors-rgb {
+        --#{$prefix}#{$color}-rgb: #{$value};
+    }
 
-  @if $body-text-align {
-    --#{$prefix}body-text-align: #{$body-text-align};
-  }
+    @each $color, $value in $theme-colors-text {
+        --#{$prefix}#{$color}-text-emphasis: #{$value};
+    }
 
-  --#{$prefix}body-color: #{$body-color};
-  --#{$prefix}body-color-rgb: #{to-rgb($body-color)};
-  --#{$prefix}body-bg: #{$body-bg};
-  --#{$prefix}body-bg-rgb: #{to-rgb($body-bg)};
+    @each $color, $value in $theme-colors-bg-subtle {
+        --#{$prefix}#{$color}-bg-subtle: #{$value};
+    }
 
-  // emphasis
-  --#{$prefix}emphasis-color: #{$body-emphasis-color};
-  --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color)};
+    @each $color, $value in $theme-colors-border-subtle {
+        --#{$prefix}#{$color}-border-subtle: #{$value};
+    }
 
-  // secondary
-  --#{$prefix}secondary-color: #{$body-secondary-color};
-  --#{$prefix}secondary-color-rgb: #{to-rgb($body-secondary-color)};
-  --#{$prefix}secondary-bg: #{$body-secondary-bg};
-  --#{$prefix}secondary-bg-rgb: #{to-rgb($body-secondary-bg)};
+    --#{$prefix}white-rgb: #{to-rgb($white)};
+    --#{$prefix}black-rgb: #{to-rgb($black)};
 
-  // tertiary
-  --#{$prefix}tertiary-color: #{$body-tertiary-color};
-  --#{$prefix}tertiary-color-rgb: #{to-rgb($body-tertiary-color)};
-  --#{$prefix}tertiary-bg: #{$body-tertiary-bg};
-  --#{$prefix}tertiary-bg-rgb: #{to-rgb($body-tertiary-bg)};
+    /* Fonts
 
-  // heading
-  --#{$prefix}heading-color: #{$headings-color};
+    Note: Use `inspect` for lists so that quoted items keep the quotes.
+    See https://github.com/sass/sass/issues/2383#issuecomment-336349172
+    */
 
-  // anchor
-  --#{$prefix}link-color: #{$link-color};
-  --#{$prefix}link-color-rgb: #{to-rgb($link-color)};
-  --#{$prefix}link-decoration: #{$link-decoration};
+    --#{$prefix}font-sans-serif: #{meta.inspect($font-family-sans-serif)};
+    --#{$prefix}font-monospace: #{meta.inspect($font-family-monospace)};
+    --#{$prefix}gradient: #{$gradient};
 
-  // anchor-hover
-  --#{$prefix}link-hover-color: #{$link-hover-color};
-  --#{$prefix}link-hover-color-rgb: #{to-rgb($link-hover-color)};
+    /* Root and body */
 
-  @if $link-hover-decoration {
-    --#{$prefix}link-hover-decoration: #{$link-hover-decoration};
-  }
+    /* root-body-variables */
+    @if $font-size-root {
+        --#{$prefix}root-font-size: #{$font-size-root};
+    }
 
-  // code
-  --#{$prefix}code-color: #{$code-color};
-  --#{$prefix}highlight-color: #{$mark-color};
-  --#{$prefix}highlight-bg: #{$mark-bg};
+    --#{$prefix}body-font-family: #{meta.inspect($font-family-base)};
 
-  // root-border-var
-  --#{$prefix}border-width: #{$border-width};
-  --#{$prefix}border-style: #{$border-style};
-  --#{$prefix}border-color: #{$border-color};
-  --#{$prefix}border-color-translucent: #{$border-color-translucent};
+    @include rfs($font-size-base, --#{$prefix}body-font-size);
 
-  // border-radius
-  --#{$prefix}border-radius: #{$border-radius};
-  --#{$prefix}border-radius-sm: #{$border-radius-sm};
-  --#{$prefix}border-radius-lg: #{$border-radius-lg};
-  --#{$prefix}border-radius-xl: #{$border-radius-xl};
-  --#{$prefix}border-radius-xxl: #{$border-radius-xxl};
-  --#{$prefix}border-radius-2xl: var(--#{$prefix}border-radius-xxl); // Deprecated in v5.3.0 for consistency
-  --#{$prefix}border-radius-pill: #{$border-radius-pill};
+    --#{$prefix}body-font-weight: #{$font-weight-base};
+    --#{$prefix}body-line-height: #{$line-height-base};
 
-  // box-shadow
-  --#{$prefix}box-shadow: #{$box-shadow};
-  --#{$prefix}box-shadow-sm: #{$box-shadow-sm};
-  --#{$prefix}box-shadow-lg: #{$box-shadow-lg};
-  --#{$prefix}box-shadow-inset: #{$box-shadow-inset};
+    @if $body-text-align {
+        --#{$prefix}body-text-align: #{$body-text-align};
+    }
 
-  // Focus styles
-  // root-focus-variables
-  --#{$prefix}focus-ring-width: #{$focus-ring-width};
-  --#{$prefix}focus-ring-opacity: #{$focus-ring-opacity};
-  --#{$prefix}focus-ring-color: #{$focus-ring-color};
+    --#{$prefix}body-color: #{$body-color};
+    --#{$prefix}body-color-rgb: #{to-rgb($body-color)};
+    --#{$prefix}body-bg: #{$body-bg};
+    --#{$prefix}body-bg-rgb: #{to-rgb($body-bg)};
 
-  // root-form-validation-variables
-  --#{$prefix}form-valid-color: #{$form-valid-color};
-  --#{$prefix}form-valid-border-color: #{$form-valid-border-color};
-  --#{$prefix}form-invalid-color: #{$form-invalid-color};
-  --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color};
+    --#{$prefix}emphasis-color: #{$body-emphasis-color};
+    --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color)};
 
-  @each $color, $value in $colors {
-    --#{$prefix}#{$color}: #{$value};
-  }
+    --#{$prefix}secondary-color: #{$body-secondary-color};
+    --#{$prefix}secondary-color-rgb: #{to-rgb($body-secondary-color)};
+    --#{$prefix}secondary-bg: #{$body-secondary-bg};
+    --#{$prefix}secondary-bg-rgb: #{to-rgb($body-secondary-bg)};
 
-  @each $color, $value in $grays {
-    --#{$prefix}gray-#{$color}: #{$value};
-  }
+    --#{$prefix}tertiary-color: #{$body-tertiary-color};
+    --#{$prefix}tertiary-color-rgb: #{to-rgb($body-tertiary-color)};
+    --#{$prefix}tertiary-bg: #{$body-tertiary-bg};
+    --#{$prefix}tertiary-bg-rgb: #{to-rgb($body-tertiary-bg)};
 
-  @each $color, $value in $theme-colors {
-    --#{$prefix}#{$color}: #{$value};
-  }
+    --#{$prefix}heading-color: #{$headings-color};
 
-  @each $color, $value in maps.$theme-colors-rgb {
-    --#{$prefix}#{$color}-rgb: #{$value};
-  }
+    --#{$prefix}link-color: #{$link-color};
+    --#{$prefix}link-color-rgb: #{to-rgb($link-color)};
+    --#{$prefix}link-decoration: #{$link-decoration};
 
-  @each $color, $value in maps.$theme-colors-text {
-    --#{$prefix}#{$color}-text-emphasis: #{$value};
-  }
+    --#{$prefix}link-hover-color: #{$link-hover-color};
+    --#{$prefix}link-hover-color-rgb: #{to-rgb($link-hover-color)};
 
-  @each $color, $value in maps.$theme-colors-bg-subtle {
-    --#{$prefix}#{$color}-bg-subtle: #{$value};
-  }
+    @if $link-hover-decoration {
+        --#{$prefix}link-hover-decoration: #{$link-hover-decoration};
+    }
 
-  @each $color, $value in maps.$theme-colors-border-subtle {
-    --#{$prefix}#{$color}-border-subtle: #{$value};
-  }
+    --#{$prefix}code-color: #{$code-color};
+    --#{$prefix}highlight-color: #{$mark-color};
+    --#{$prefix}highlight-bg: #{$mark-bg};
 
-  color-scheme: light;
+    /* root-border-var */
+    --#{$prefix}border-width: #{$border-width};
+    --#{$prefix}border-style: #{$border-style};
+    --#{$prefix}border-color: #{$border-color};
+    --#{$prefix}border-color-translucent: #{$border-color-translucent};
+
+    --#{$prefix}border-radius: #{$border-radius};
+    --#{$prefix}border-radius-sm: #{$border-radius-sm};
+    --#{$prefix}border-radius-lg: #{$border-radius-lg};
+    --#{$prefix}border-radius-xl: #{$border-radius-xl};
+    --#{$prefix}border-radius-xxl: #{$border-radius-xxl};
+    --#{$prefix}border-radius-2xl: var(
+        --#{$prefix}border-radius-xxl
+    ); // Deprecated in v5.3.0 for consistency
+
+    --#{$prefix}box-shadow: #{$box-shadow};
+    --#{$prefix}box-shadow-sm: #{$box-shadow-sm};
+    --#{$prefix}box-shadow-lg: #{$box-shadow-lg};
+    --#{$prefix}box-shadow-inset: #{$box-shadow-inset};
+
+    /* Focus styles */
+
+    /* root-focus-variables */
+    --#{$prefix}focus-ring-width: #{$focus-ring-width};
+    --#{$prefix}focus-ring-opacity: #{$focus-ring-opacity};
+    --#{$prefix}focus-ring-color: #{$focus-ring-color};
+
+    /* root-form-validation-variables */
+    --#{$prefix}form-valid-color: #{$form-valid-color};
+    --#{$prefix}form-valid-border-color: #{$form-valid-border-color};
+    --#{$prefix}form-invalid-color: #{$form-invalid-color};
+    --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color};
 }
 
 @if $enable-dark-mode {
-  @include color-mode(dark, true) {
-    // root-dark-mode-vars
-    --#{$prefix}body-color: #{$body-color-dark};
-    --#{$prefix}body-color-rgb: #{to-rgb($body-color-dark)};
-    --#{$prefix}body-bg: #{$body-bg-dark};
-    --#{$prefix}body-bg-rgb: #{to-rgb($body-bg-dark)};
+    @include color-mode(dark, true) {
+        color-scheme: dark;
 
-    // emphasis
-    --#{$prefix}emphasis-color: #{$body-emphasis-color-dark};
-    --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color-dark)};
+        /* root-dark-mode-vars */
+        --#{$prefix}body-color: #{$body-color-dark};
+        --#{$prefix}body-color-rgb: #{to-rgb($body-color-dark)};
+        --#{$prefix}body-bg: #{$body-bg-dark};
+        --#{$prefix}body-bg-rgb: #{to-rgb($body-bg-dark)};
 
-    // secondary
-    --#{$prefix}secondary-color: #{$body-secondary-color-dark};
-    --#{$prefix}secondary-color-rgb: #{to-rgb($body-secondary-color-dark)};
-    --#{$prefix}secondary-bg: #{$body-secondary-bg-dark};
-    --#{$prefix}secondary-bg-rgb: #{to-rgb($body-secondary-bg-dark)};
+        --#{$prefix}emphasis-color: #{$body-emphasis-color-dark};
+        --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color-dark)};
 
-    // tertiary
-    --#{$prefix}tertiary-color: #{$body-tertiary-color-dark};
-    --#{$prefix}tertiary-color-rgb: #{to-rgb($body-tertiary-color-dark)};
-    --#{$prefix}tertiary-bg: #{$body-tertiary-bg-dark};
-    --#{$prefix}tertiary-bg-rgb: #{to-rgb($body-tertiary-bg-dark)};
+        --#{$prefix}secondary-color: #{$body-secondary-color-dark};
+        --#{$prefix}secondary-color-rgb: #{to-rgb($body-secondary-color-dark)};
+        --#{$prefix}secondary-bg: #{$body-secondary-bg-dark};
+        --#{$prefix}secondary-bg-rgb: #{to-rgb($body-secondary-bg-dark)};
 
-    @each $color, $value in maps.$theme-colors-text-dark {
-      --#{$prefix}#{$color}-text-emphasis: #{$value};
+        --#{$prefix}tertiary-color: #{$body-tertiary-color-dark};
+        --#{$prefix}tertiary-color-rgb: #{to-rgb($body-tertiary-color-dark)};
+        --#{$prefix}tertiary-bg: #{$body-tertiary-bg-dark};
+        --#{$prefix}tertiary-bg-rgb: #{to-rgb($body-tertiary-bg-dark)};
+
+        @each $color, $value in $theme-colors-text-dark {
+            --#{$prefix}#{$color}-text-emphasis: #{$value};
+        }
+
+        @each $color, $value in $theme-colors-bg-subtle-dark {
+            --#{$prefix}#{$color}-bg-subtle: #{$value};
+        }
+
+        @each $color, $value in $theme-colors-border-subtle-dark {
+            --#{$prefix}#{$color}-border-subtle: #{$value};
+        }
+
+        --#{$prefix}heading-color: #{$headings-color-dark};
+
+        --#{$prefix}link-color: #{$link-color-dark};
+        --#{$prefix}link-hover-color: #{$link-hover-color-dark};
+        --#{$prefix}link-color-rgb: #{to-rgb($link-color-dark)};
+        --#{$prefix}link-hover-color-rgb: #{to-rgb($link-hover-color-dark)};
+
+        --#{$prefix}code-color: #{$code-color-dark};
+        --#{$prefix}highlight-color: #{$mark-color-dark};
+        --#{$prefix}highlight-bg: #{$mark-bg-dark};
+
+        --#{$prefix}border-color: #{$border-color-dark};
+        --#{$prefix}border-color-translucent: #{$border-color-translucent-dark};
+
+        --#{$prefix}form-valid-color: #{$form-valid-color-dark};
+        --#{$prefix}form-valid-border-color: #{$form-valid-border-color-dark};
+        --#{$prefix}form-invalid-color: #{$form-invalid-color-dark};
+        --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color-dark};
     }
-
-    @each $color, $value in maps.$theme-colors-bg-subtle-dark {
-      --#{$prefix}#{$color}-bg-subtle: #{$value};
-    }
-
-    @each $color, $value in maps.$theme-colors-border-subtle-dark {
-      --#{$prefix}#{$color}-border-subtle: #{$value};
-    }
-
-    --#{$prefix}heading-color: #{$headings-color-dark};
-
-    // anchor
-    --#{$prefix}link-color: #{$link-color-dark};
-    --#{$prefix}link-hover-color: #{$link-hover-color-dark};
-    --#{$prefix}link-color-rgb: #{to-rgb($link-color-dark)};
-    --#{$prefix}link-hover-color-rgb: #{to-rgb($link-hover-color-dark)};
-
-    // code
-    --#{$prefix}code-color: #{$code-color-dark};
-    --#{$prefix}highlight-color: #{$mark-color-dark};
-    --#{$prefix}highlight-bg: #{$mark-bg-dark};
-
-    // border
-    --#{$prefix}border-color: #{$border-color-dark};
-    --#{$prefix}border-color-translucent: #{$border-color-translucent-dark};
-
-    // form
-    --#{$prefix}form-valid-color: #{$form-valid-color-dark};
-    --#{$prefix}form-valid-border-color: #{$form-valid-border-color-dark};
-    --#{$prefix}form-invalid-color: #{$form-invalid-color-dark};
-    --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color-dark};
-
-    color-scheme: dark;
-  }
 }
+
+/* stylelint-enable */
