@@ -58,9 +58,12 @@ export default {
     minimizer: [
       new CssMinimizerPlugin({
         minify: CssMinimizerPlugin.lightningCssMinify,
+
         minimizerOptions: {
           targets: lightningcss.browserslistToTargets(
-            browserslist(">0.3%, last 2 major versions, not dead")
+            browserslist(
+              ">= 0.5%, last 2 major versions, not dead, Chrome >= 60, Firefox >= 60, Firefox ESR, iOS >= 12, Safari >= 12, not Explorer <= 11, not kaios <= 2.5",
+            ),
           ),
           preset: ["default", { discardComments: { removeAll: true } }],
         },
