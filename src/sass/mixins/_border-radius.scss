@@ -1,0 +1,86 @@
+/* stylelint-disable */
+
+/* Single side border-radius
+
+Helper function to replace negative values with 0
+*/
+@use "sass:list";
+@use "sass:meta";
+
+@use "../variables" as *;
+
+@function valid-radius($radius) {
+    $return: ();
+
+    @each $value in $radius {
+        @if meta.type-of($value) == number {
+            $return: list.append($return, max($value, 0));
+        } @else {
+            $return: list.append($return, $value);
+        }
+    }
+    @return $return;
+}
+
+/* border-radius-mixins */
+@mixin border-radius($radius: $border-radius, $fallback-border-radius: false) {
+    @if $enable-rounded {
+        border-radius: valid-radius($radius);
+    } @else if $fallback-border-radius != false {
+        border-radius: $fallback-border-radius;
+    }
+}
+
+@mixin border-top-radius($radius: $border-radius) {
+    @if $enable-rounded {
+        border-start-start-radius: valid-radius($radius);
+        border-start-end-radius: valid-radius($radius);
+    }
+}
+
+@mixin border-end-radius($radius: $border-radius) {
+    @if $enable-rounded {
+        border-start-end-radius: valid-radius($radius);
+        border-end-end-radius: valid-radius($radius);
+    }
+}
+
+@mixin border-bottom-radius($radius: $border-radius) {
+    @if $enable-rounded {
+        border-end-start-radius: valid-radius($radius);
+        border-end-end-radius: valid-radius($radius);
+    }
+}
+
+@mixin border-start-radius($radius: $border-radius) {
+    @if $enable-rounded {
+        border-start-start-radius: valid-radius($radius);
+        border-end-start-radius: valid-radius($radius);
+    }
+}
+
+@mixin border-top-start-radius($radius: $border-radius) {
+    @if $enable-rounded {
+        border-start-start-radius: valid-radius($radius);
+    }
+}
+
+@mixin border-top-end-radius($radius: $border-radius) {
+    @if $enable-rounded {
+        border-start-end-radius: valid-radius($radius);
+    }
+}
+
+@mixin border-bottom-end-radius($radius: $border-radius) {
+    @if $enable-rounded {
+        border-end-end-radius: valid-radius($radius);
+    }
+}
+
+@mixin border-bottom-start-radius($radius: $border-radius) {
+    @if $enable-rounded {
+        border-end-start-radius: valid-radius($radius);
+    }
+}
+
+/* stylelint-enable */

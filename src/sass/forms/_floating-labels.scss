@@ -1,0 +1,120 @@
+@use "../mixins/border-radius" as *;
+@use "../mixins/transition" as *;
+@use "../variables" as *;
+
+.form-floating {
+    position: relative;
+
+    & > .form-control,
+    & > .form-control-plaintext,
+    & > .form-select {
+        block-size: $form-floating-height;
+        min-block-size: $form-floating-height;
+        line-height: $form-floating-line-height;
+    }
+
+    & > label {
+        pointer-events: none;
+
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        transform-origin: 0 0;
+
+        overflow: hidden;
+
+        max-inline-size: 100%;
+        block-size: 100%; // allow textareas
+        padding: $form-floating-padding-y $form-floating-padding-x;
+        border: $input-border-width solid transparent; // Required for aligning label's text with the input as it affects inner box model
+
+        color: rgb(
+            var(--#{$prefix}body-color-rgb) / #{$form-floating-label-opacity}
+        );
+        text-align: start;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        @include transition($form-floating-transition);
+    }
+
+    & > .form-control,
+    & > .form-control-plaintext {
+        padding: $form-floating-padding-y $form-floating-padding-x;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:focus,
+        &:not(:placeholder-shown) {
+            padding-top: $form-floating-input-padding-t;
+            padding-bottom: $form-floating-input-padding-b;
+        }
+
+        /* Duplicated because `:-webkit-autofill` invalidates other selectors when grouped */
+        &:-webkit-autofill {
+            padding-block: $form-floating-input-padding-t
+                $form-floating-input-padding-b;
+        }
+    }
+
+    & > .form-select {
+        padding-block: $form-floating-input-padding-t
+            $form-floating-input-padding-b;
+        padding-inline-start: $form-floating-padding-x;
+    }
+
+    & > .form-control:focus,
+    & > .form-control:not(:placeholder-shown),
+    & > .form-control-plaintext,
+    & > .form-select {
+        /* stylelint-disable-next-line no-descending-specificity */
+        ~ label {
+            transform: $form-floating-label-transform;
+        }
+    }
+
+    /* Duplicated because `:-webkit-autofill` invalidates other selectors when grouped */
+    & > .form-control:-webkit-autofill {
+        ~ label {
+            transform: $form-floating-label-transform;
+        }
+    }
+
+    & > textarea:focus,
+    & > textarea:not(:placeholder-shown) {
+        ~ label::after {
+            content: "";
+
+            position: absolute;
+            z-index: -1;
+            inset: $form-floating-padding-y ($form-floating-padding-x * 0.5);
+
+            inline-size: $form-floating-label-height;
+
+            background-color: $input-bg;
+
+            @include border-radius($input-border-radius);
+        }
+    }
+
+    & > textarea:disabled ~ label::after {
+        background-color: $input-disabled-bg;
+    }
+
+    & > .form-control-plaintext {
+        /* stylelint-disable-next-line no-descending-specificity */
+        ~ label {
+            border-width: $input-border-width 0; // Required to properly position label text - as explained above
+        }
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    & > :disabled ~ label,
+    & > .form-control:disabled ~ label {
+        /* Required for `.form-control`s because of specificity */
+        color: $form-floating-label-disabled-color;
+    }
+}
