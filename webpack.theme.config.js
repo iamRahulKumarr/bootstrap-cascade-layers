@@ -12,12 +12,12 @@ export default {
 
   entry: {
     main: "./src/js/index.js", // JS entry
-    styles: "./src/sass/index.scss", // SASS entry
+    styles: "./theme/_index.scss", // SASS entry
   },
 
   output: {
     filename: "[name].js",
-    path: path.resolve(process.cwd(), "dist"),
+    path: path.resolve(process.cwd(), "theme-dist"),
     chunkFormat: "module", // explicitly set chunk format to ES module
     clean: true,
   },

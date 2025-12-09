@@ -13,9 +13,10 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "webpack.config.js",
   "scripts": {
-    "watch": "webpack --watch --mode=development"
+    "watch:package": "webpack --config webpack.package.config.js --watch",
+    "watch:package:build-aggressive": "BROWSERS_ENV=aggressive webpack --config webpack.package.config.js --watch",
+    "watch:theme": "webpack --config webpack.theme.config.js --watch"
   },
   "devDependencies": {
     "babel-loader": "^10.0.0",
