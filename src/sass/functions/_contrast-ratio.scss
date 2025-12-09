@@ -47,7 +47,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025
         $value: if(
             math.div($value, 255) < 0.04045,
             math.div(math.div($value, 255), 12.92),
-            list.nth($_luminance-list, $value + 1)
+            list.nth($_luminance-list, math.round($value + 1))
         );
         $rgb: map.merge(
             $rgb,

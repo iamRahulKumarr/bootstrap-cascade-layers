@@ -1,11 +1,47 @@
 @use "sass:meta";
 
-@layer bs-root, bs-reboot;
+@layer bs-base, bs-layout, bs-components, bs-utilities;
+
+@layer bs-base {
+    @layer bs-root, bs-reboot, bs-type;
+}
 
 @layer bs-root {
-  @include meta.load-css("root");
+    @include meta.load-css("root");
 }
 
 @layer bs-reboot {
-  @include meta.load-css("reboot");
+    @include meta.load-css("reboot");
+}
+
+@layer bs-type {
+    @include meta.load-css("type");
+}
+
+@layer bs-layout {
+    @layer bs-containers, bs-grid;
+}
+
+@layer bs-containers {
+    @include meta.load-css("containers");
+}
+
+@layer bs-grid {
+    @include meta.load-css("grid");
+}
+
+@layer bs-components {
+    @layer bs-image, bs-tables, bs-forms;
+}
+
+@layer bs-image {
+    @include meta.load-css("images");
+}
+
+@layer bs-tables {
+    @include meta.load-css("tables");
+}
+
+@layer bs-forms {
+    @include meta.load-css("forms");
 }

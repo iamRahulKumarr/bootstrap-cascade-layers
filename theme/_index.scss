@@ -1,0 +1,7 @@
+@use "sass:meta";
+
+@layer bootstrap, theme;
+
+@layer bootstrap {
+    @include meta.load-css("../src/sass/index");
+}

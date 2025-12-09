@@ -1,21 +1,21 @@
 /* stylelint-disable  */
-@function rgba-css-var($identifier, $target) {
+@function rgba-css-var($prefix, $identifier, $target) {
     @if $identifier == "body" and $target == "bg" {
         @return rgb(
-            var(--#{config.$prefix}#{$identifier}-bg-rgb) /
-                var(--#{config.$prefix}#{$target}-opacity)
+            var(--#{$prefix}#{$identifier}-bg-rgb) /
+                var(--#{$prefix}#{$target}-opacity)
         );
     }
 
     @if $identifier == "body" and $target == "text" {
         @return rgb(
-            var(--#{config.$prefix}#{$identifier}-color-rgb) /
-                var(--#{config.$prefix}#{$target}-opacity)
+            var(--#{$prefix}#{$identifier}-color-rgb) /
+                var(--#{$prefix}#{$target}-opacity)
         );
     } @else {
         @return rgb(
-            var(--#{config.$prefix}#{$identifier}-rgb) /
-                var(--#{config.$prefix}#{$target}-opacity)
+            var(--#{$prefix}#{$identifier}-rgb) /
+                var(--#{$prefix}#{$target}-opacity)
         );
     }
 }

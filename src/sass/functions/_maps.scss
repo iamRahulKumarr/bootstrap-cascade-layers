@@ -3,6 +3,7 @@
 @use "sass:list";
 
 @use "to-rgb" as *;
+@use "rgba-css-var" as *;
 
 // stylelint-disable scss/dollar-variable-pattern
 @function map-loop($map, $func, $args...) {

@@ -1,6 +1,7 @@
 @use "sass:string";
 
 @use "str-replace" as *;
+@use "../variables" as *;
 
 // See https://codepen.io/kevinweber/pen/dXWoRw
 // Requires the use of quotes around data URIs.
