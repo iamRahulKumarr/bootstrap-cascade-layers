@@ -1,0 +1,119 @@
+@use "../functions/math" as *;
+@use "../mixins/border-radius" as *;
+@use "../mixins/box-shadow" as *;
+@use "../mixins/gradients" as *;
+@use "../mixins/transition" as *;
+@use "../variables" as *;
+
+/* Range
+
+ Style range inputs the same across browsers. Vendor-specific rules for pseudo
+ elements cannot be mixed. As such, there are no shared styles for focus or
+ active states on prefixed selectors. */
+
+.form-range {
+    inline-size: 100%;
+    block-size: add(
+        $form-range-thumb-height,
+        $form-range-thumb-focus-box-shadow-width * 2
+    );
+    padding: 0; // Need to reset padding
+
+    appearance: none;
+    background-color: transparent;
+
+    &::-moz-focus-outer {
+        border: 0;
+    }
+
+    &::-webkit-slider-thumb {
+        inline-size: $form-range-thumb-width;
+        block-size: $form-range-thumb-height;
+        margin-top: ($form-range-track-height - $form-range-thumb-height) * 0.5; // Webkit specific
+        border: $form-range-thumb-border;
+
+        @include border-radius($form-range-thumb-border-radius);
+        @include box-shadow($form-range-thumb-box-shadow);
+        @include transition($form-range-thumb-transition);
+
+        appearance: none;
+
+        @include gradient-bg($form-range-thumb-bg);
+
+        &:active {
+            @include gradient-bg($form-range-thumb-active-bg);
+        }
+    }
+
+    &::-webkit-slider-runnable-track {
+        cursor: $form-range-track-cursor;
+
+        inline-size: $form-range-track-width;
+        block-size: $form-range-track-height;
+        border-color: transparent;
+
+        color: transparent; // Why?
+
+        background-color: $form-range-track-bg;
+
+        @include border-radius($form-range-track-border-radius);
+        @include box-shadow($form-range-track-box-shadow);
+    }
+
+    &::-moz-range-thumb {
+        inline-size: $form-range-thumb-width;
+        block-size: $form-range-thumb-height;
+        border: $form-range-thumb-border;
+        appearance: none;
+
+        @include gradient-bg($form-range-thumb-bg);
+        @include border-radius($form-range-thumb-border-radius);
+        @include box-shadow($form-range-thumb-box-shadow);
+        @include transition($form-range-thumb-transition);
+
+        &:active {
+            @include gradient-bg($form-range-thumb-active-bg);
+        }
+    }
+
+    &::-moz-range-track {
+        cursor: $form-range-track-cursor;
+
+        inline-size: $form-range-track-width;
+        block-size: $form-range-track-height;
+        border-color: transparent; // Firefox specific?
+
+        color: transparent;
+
+        background-color: $form-range-track-bg;
+
+        @include border-radius($form-range-track-border-radius);
+        @include box-shadow($form-range-track-box-shadow);
+    }
+
+    &:focus {
+        outline: 0;
+
+        // Pseudo-elements must be split across multiple rulesets to have an effect.
+        // No box-shadow() mixin for focus accessibility.
+        &::-webkit-slider-thumb {
+            box-shadow: $form-range-thumb-focus-box-shadow;
+        }
+
+        &::-moz-range-thumb {
+            box-shadow: $form-range-thumb-focus-box-shadow;
+        }
+    }
+
+    &:disabled {
+        pointer-events: none;
+
+        &::-webkit-slider-thumb {
+            background-color: $form-range-thumb-disabled-bg;
+        }
+
+        &::-moz-range-thumb {
+            background-color: $form-range-thumb-disabled-bg;
+        }
+    }
+}
