@@ -1,0 +1,72 @@
+@use "../variables" as *;
+
+/* caret-mixins */
+@mixin caret-down($width: $caret-width) {
+    border-block-start: $width solid;
+    border-block-end: 0;
+    border-inline-start: $width solid transparent;
+    border-inline-end: $width solid transparent;
+}
+
+@mixin caret-up($width: $caret-width) {
+    border-block-start: 0;
+    border-block-end: $width solid;
+    border-inline-start: $width solid transparent;
+    border-inline-end: $width solid transparent;
+}
+
+@mixin caret-end($width: $caret-width) {
+    border-block-start: $width solid transparent;
+    border-block-end: $width solid transparent;
+    border-inline-start: $width solid;
+    border-inline-end: 0;
+}
+
+@mixin caret-start($width: $caret-width) {
+    border-block-start: $width solid transparent;
+    border-block-end: $width solid transparent;
+    border-inline-end: $width solid;
+}
+
+@mixin caret(
+    $direction: down,
+    $width: $caret-width,
+    $spacing: $caret-spacing,
+    $vertical-align: $caret-vertical-align
+) {
+    @if $enable-caret {
+        &::after {
+            content: "";
+            display: inline-block;
+            margin-inline-start: $spacing;
+            vertical-align: $vertical-align;
+
+            @if $direction == down {
+                @include caret-down($width);
+            } @else if $direction == up {
+                @include caret-up($width);
+            } @else if $direction == end {
+                @include caret-end($width);
+            }
+        }
+
+        @if $direction == start {
+            &::after {
+                display: none;
+            }
+
+            &::before {
+                content: "";
+                display: inline-block;
+                margin-inline-end: $spacing;
+                vertical-align: $vertical-align;
+
+                @include caret-start($width);
+            }
+        }
+
+        &:empty::after {
+            margin-inline-start: 0;
+        }
+    }
+}

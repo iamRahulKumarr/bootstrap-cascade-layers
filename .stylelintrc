@@ -8,6 +8,8 @@
     "theme-dist/**/*.css"
   ],
   "rules": {
-   "scss/dollar-variable-empty-line-before": null
+   "scss/dollar-variable-empty-line-before": null,
+   "scss/at-import-partial-extension": "never",
+   "selector-not-notation": "complex"
   }
 }

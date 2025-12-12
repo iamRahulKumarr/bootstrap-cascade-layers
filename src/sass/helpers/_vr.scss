@@ -1,0 +1,13 @@
+@use "../variables" as *;
+
+/* Vertical Row */
+.vr {
+    display: inline-block;
+    align-self: stretch;
+
+    inline-size: $vr-border-width;
+    min-block-size: 1em;
+
+    opacity: $hr-opacity;
+    background-color: currentcolor;
+}

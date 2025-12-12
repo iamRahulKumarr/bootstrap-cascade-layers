@@ -1,0 +1,29 @@
+@use "../variables" as *;
+
+// Credit: Nicolas Gallagher and SUIT CSS.
+
+.ratio {
+    position: relative;
+    inline-size: 100%;
+
+    &::before {
+        content: "";
+        display: block;
+        padding-block-start: var(--#{$prefix}aspect-ratio);
+    }
+
+    > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        inline-size: 100%;
+        block-size: 100%;
+    }
+}
+
+@each $key, $ratio in $aspect-ratios {
+    .ratio-#{$key} {
+        --#{$prefix}aspect-ratio: #{$ratio};
+    }
+}

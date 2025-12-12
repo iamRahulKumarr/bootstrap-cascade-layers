@@ -1,0 +1,60 @@
+@use "functions/escape-svg" as *;
+@use "mixins/border-radius" as *;
+@use "vendor/rfs" as *;
+@use "variables" as *;
+
+.breadcrumb {
+    /* breadcrumb-css-vars */
+    --#{$prefix}breadcrumb-padding-x: #{$breadcrumb-padding-x};
+    --#{$prefix}breadcrumb-padding-y: #{$breadcrumb-padding-y};
+    --#{$prefix}breadcrumb-margin-bottom: #{$breadcrumb-margin-bottom};
+    --#{$prefix}breadcrumb-bg: #{$breadcrumb-bg};
+    --#{$prefix}breadcrumb-border-radius: #{$breadcrumb-border-radius};
+    --#{$prefix}breadcrumb-divider-color: #{$breadcrumb-divider-color};
+    --#{$prefix}breadcrumb-item-padding-x: #{$breadcrumb-item-padding-x};
+    --#{$prefix}breadcrumb-item-active-color: #{$breadcrumb-active-color};
+
+    @include rfs($breadcrumb-font-size, --#{$prefix}breadcrumb-font-size);
+
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-block-end: var(--#{$prefix}breadcrumb-margin-bottom);
+    padding: var(--#{$prefix}breadcrumb-padding-y)
+        var(--#{$prefix}breadcrumb-padding-x);
+
+    list-style: none;
+
+    @include font-size(var(--#{$prefix}breadcrumb-font-size));
+
+    background-color: var(--#{$prefix}breadcrumb-bg);
+
+    @include border-radius(var(--#{$prefix}breadcrumb-border-radius));
+}
+
+.breadcrumb-item {
+    /* The separator between breadcrumbs (by default, a forward-slash: "/") */
+    & + .breadcrumb-item {
+        padding-inline-start: var(--#{$prefix}breadcrumb-item-padding-x);
+
+        &::before {
+            content: var(
+                    --#{$prefix}breadcrumb-divider,
+                    escape-svg($breadcrumb-divider)
+                )
+                #{"/* rtl:"}
+                var(
+                    --#{$prefix}breadcrumb-divider,
+                    escape-svg($breadcrumb-divider-flipped)
+                )
+                #{"*/"};
+            float: left; // Suppress inline spacings and underlining of the separator
+            padding-inline-end: var(--#{$prefix}breadcrumb-item-padding-x);
+            color: var(--#{$prefix}breadcrumb-divider-color);
+        }
+    }
+
+    &.active {
+        color: var(--#{$prefix}breadcrumb-item-active-color);
+    }
+}
