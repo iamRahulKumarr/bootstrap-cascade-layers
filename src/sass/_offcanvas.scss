@@ -1,0 +1,175 @@
+@use "sass:map";
+
+@use "./mixins/backdrop" as *;
+@use "./mixins/breakpoints" as *;
+@use "./mixins/box-shadow" as *;
+@use "./mixins/transition" as *;
+@use "./variables" as *;
+
+%offcanvas-css-vars {
+    /* offcanvas-css-vars */
+    --#{$prefix}offcanvas-zindex: #{$zindex-offcanvas};
+    --#{$prefix}offcanvas-width: #{$offcanvas-horizontal-width};
+    --#{$prefix}offcanvas-height: #{$offcanvas-vertical-height};
+    --#{$prefix}offcanvas-padding-x: #{$offcanvas-padding-x};
+    --#{$prefix}offcanvas-padding-y: #{$offcanvas-padding-y};
+    --#{$prefix}offcanvas-color: #{$offcanvas-color};
+    --#{$prefix}offcanvas-bg: #{$offcanvas-bg-color};
+    --#{$prefix}offcanvas-border-width: #{$offcanvas-border-width};
+    --#{$prefix}offcanvas-border-color: #{$offcanvas-border-color};
+    --#{$prefix}offcanvas-box-shadow: #{$offcanvas-box-shadow};
+    --#{$prefix}offcanvas-transition: #{transform $offcanvas-transition-duration
+        ease-in-out};
+    --#{$prefix}offcanvas-title-line-height: #{$offcanvas-title-line-height};
+}
+
+@each $breakpoint in map.keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    .offcanvas#{$infix} {
+        @extend %offcanvas-css-vars;
+    }
+}
+
+@each $breakpoint in map.keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    .offcanvas#{$infix} {
+        @include media-breakpoint-down($next) {
+            position: fixed;
+            z-index: var(--#{$prefix}offcanvas-zindex);
+            bottom: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            max-inline-size: 100%;
+
+            color: var(--#{$prefix}offcanvas-color);
+
+            visibility: hidden;
+            background-color: var(--#{$prefix}offcanvas-bg);
+            background-clip: padding-box;
+            outline: 0;
+
+            @include box-shadow(var(--#{$prefix}offcanvas-box-shadow));
+            @include transition(var(--#{$prefix}offcanvas-transition));
+
+            &.offcanvas-start {
+                top: 0;
+                left: 0;
+                transform: translateX(-100%);
+
+                inline-size: var(--#{$prefix}offcanvas-width);
+                border-inline-end: var(--#{$prefix}offcanvas-border-width) solid
+                    var(--#{$prefix}offcanvas-border-color);
+            }
+
+            &.offcanvas-end {
+                top: 0;
+                right: 0;
+                transform: translateX(100%);
+
+                border-inline-start: var(--#{$prefix}offcanvas-border-width)
+                    solid var(--#{$prefix}offcanvas-border-color);
+
+                inine-size: var(--#{$prefix}offcanvas-width);
+            }
+
+            &.offcanvas-top {
+                top: 0;
+                right: 0;
+                left: 0;
+                transform: translateY(-100%);
+
+                block-size: var(--#{$prefix}offcanvas-height);
+                max-block-size: 100%;
+                border-block-end: var(--#{$prefix}offcanvas-border-width) solid
+                    var(--#{$prefix}offcanvas-border-color);
+            }
+
+            &.offcanvas-bottom {
+                right: 0;
+                left: 0;
+                transform: translateY(100%);
+
+                block-size: var(--#{$prefix}offcanvas-height);
+                max-block-size: 100%;
+                border-block-start: var(--#{$prefix}offcanvas-border-width)
+                    solid var(--#{$prefix}offcanvas-border-color);
+            }
+
+            &.showing,
+            &.show:not(.hiding) {
+                transform: none;
+            }
+
+            &.showing,
+            &.hiding,
+            &.show {
+                visibility: visible;
+            }
+        }
+
+        @if not($infix == "") {
+            @include media-breakpoint-up($next) {
+                --#{$prefix}offcanvas-height: auto;
+                --#{$prefix}offcanvas-border-width: 0;
+
+                background-color: transparent;
+
+                .offcanvas-header {
+                    display: none;
+                }
+
+                .offcanvas-body {
+                    overflow-y: visible;
+                    display: flex;
+                    flex-grow: 0;
+
+                    padding: 0;
+
+                    // Reset `background-color` in case `.bg-*` classes are used in offcanvas
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+}
+
+.offcanvas-backdrop {
+    @include overlay-backdrop(
+        $zindex-offcanvas-backdrop,
+        $offcanvas-backdrop-bg,
+        $offcanvas-backdrop-opacity
+    );
+}
+
+.offcanvas-header {
+    display: flex;
+    align-items: center;
+    padding: var(--#{$prefix}offcanvas-padding-y)
+        var(--#{$prefix}offcanvas-padding-x);
+
+    .btn-close {
+        // Split properties to avoid invalid calc() function if value is 0
+        margin-block: calc(-0.5 * var(--#{$prefix}offcanvas-padding-y));
+        margin-inline: auto calc(-0.5 * var(--#{$prefix}offcanvas-padding-x));
+        padding: calc(var(--#{$prefix}offcanvas-padding-y) * 0.5)
+            calc(var(--#{$prefix}offcanvas-padding-x) * 0.5);
+    }
+}
+
+.offcanvas-title {
+    margin-bottom: 0;
+    line-height: var(--#{$prefix}offcanvas-title-line-height);
+}
+
+.offcanvas-body {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: var(--#{$prefix}offcanvas-padding-y)
+        var(--#{$prefix}offcanvas-padding-x);
+}

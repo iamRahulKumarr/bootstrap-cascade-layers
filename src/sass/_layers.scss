@@ -5,7 +5,7 @@
 /* Base Layer */
 @layer bs-base {
     @layer bs-root,
-    bs-reboot,
+    bs-reboot, 
     bs-type;
 }
 
@@ -47,7 +47,18 @@
     bs-buttons,
     bs-card,
     bs-carousel,
-    bs-dropdown;
+    bs-dropdown,
+    bs-list-group,
+    bs-modal,
+    bs-nav,
+    bs-navbar,
+    bs-offcanvas,
+    bs-pagination,
+    bs-popover,
+    bs-progress,
+    bs-spinners,
+    bs-toasts,
+    bs-tooltip;
 }
 
 @layer bs-image {
@@ -82,7 +93,7 @@
     @include meta.load-css("button-group");
 }
 
-@layer bs-button {
+@layer bs-buttons {
     @include meta.load-css("buttons");
 }
 
@@ -98,6 +109,50 @@
     @include meta.load-css("dropdown");
 }
 
+@layer bs-list-group {
+    @include meta.load-css("list-group");
+}
+
+@layer bs-modal {
+    @include meta.load-css("modal");
+}
+
+@layer bs-nav {
+    @include meta.load-css("nav");
+}
+
+@layer bs-navbar {
+    @include meta.load-css("navbar");
+}
+
+@layer bs-offcanvas {
+    @include meta.load-css("offcanvas");
+}
+
+@layer bs-pagination {
+    @include meta.load-css("pagination");
+}
+
+@layer bs-popover {
+    @include meta.load-css("popover");
+}
+
+@layer bs-progress {
+    @include meta.load-css("progress");
+}
+
+@layer bs-spinners {
+    @include meta.load-css("spinners");
+}
+
+@layer bs-toasts {
+    @include meta.load-css("toasts");
+}
+
+@layer bs-tooltip {
+    @include meta.load-css("tooltip");
+}
+
 /* Utilities Layer */
 @layer bs-utilities {
     @layer bs-util-clearfix,
@@ -111,7 +166,8 @@
     bs-util-stretched-link,
     bs-util-text-truncation,
     bs-util-visually-hidden,
-    bs-util-vr;
+    bs-util-vr,
+    bs-util-transitions;
 }
 
 @layer bs-util-clearfix {
@@ -160,4 +216,8 @@
 
 @layer bs-util-vr {
     @include meta.load-css("helpers/vr");
+}
+
+@layer bs-util-transitions {
+    @include meta.load-css("transitions");
 }

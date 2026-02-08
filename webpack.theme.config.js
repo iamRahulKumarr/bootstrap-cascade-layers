@@ -5,6 +5,21 @@ import * as lightningcss from "lightningcss";
 import browserslist from "browserslist";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
+// e.g. BROWSERS_ENV=aggressive webpack ...
+const BROWSERS_ENV = process.env.BROWSERS_ENV || "baseline";
+
+const BROWSERS_QUERIES = {
+  aggressive:
+    ">= 0.5%, last 2 major versions, not dead, Chrome >= 60, Firefox >= 60, Firefox ESR, iOS >= 12, Safari >= 12, not Explorer <= 11, not kaios <= 2.5",
+  baseline: "baseline widely available",
+};
+
+const browsersQuery = BROWSERS_QUERIES[BROWSERS_ENV] || BROWSERS_QUERIES.wide;
+
+const lightningTargets = lightningcss.browserslistToTargets(
+  browserslist(browsersQuery),
+);
+
 export default {
   mode: "production",
 
@@ -60,11 +75,7 @@ export default {
         minify: CssMinimizerPlugin.lightningCssMinify,
 
         minimizerOptions: {
-          targets: lightningcss.browserslistToTargets(
-            browserslist(
-              ">= 0.5%, last 2 major versions, not dead, Chrome >= 60, Firefox >= 60, Firefox ESR, iOS >= 12, Safari >= 12, not Explorer <= 11, not kaios <= 2.5",
-            ),
-          ),
+          targets: lightningTargets,
           preset: ["default", { discardComments: { removeAll: true } }],
         },
       }),

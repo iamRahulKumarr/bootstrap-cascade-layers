@@ -1,0 +1,23 @@
+@use "../variables" as *;
+
+/* Shared between modals and offcanvases */
+@mixin overlay-backdrop($zindex, $backdrop-bg, $backdrop-opacity) {
+    position: fixed;
+    z-index: $zindex;
+    top: 0;
+    left: 0;
+
+    inline-size: 100vw;
+    block-size: 100vh;
+
+    background-color: $backdrop-bg;
+
+    /* Fade for backdrop */
+    &.fade {
+        opacity: 0;
+    }
+
+    &.show {
+        opacity: $backdrop-opacity;
+    }
+}

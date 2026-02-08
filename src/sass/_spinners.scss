@@ -1,0 +1,85 @@
+@use "./variables" as *;
+
+/* Rotating border */
+
+.spinner-grow,
+.spinner-border {
+    display: inline-block;
+    flex-shrink: 0;
+
+    inline-size: var(--#{$prefix}spinner-width);
+    block-size: var(--#{$prefix}spinner-height);
+    border-radius: 50%;
+
+    vertical-align: var(--#{$prefix}spinner-vertical-align);
+
+    animation: var(--#{$prefix}spinner-animation-speed) linear infinite
+        var(--#{$prefix}spinner-animation-name);
+}
+
+/* spinner-border-keyframes */
+@keyframes spinner-border {
+    to {
+        transform: rotate(360deg) #{"/* rtl:ignore */"};
+    }
+}
+
+.spinner-border {
+    /* spinner-border-css-vars */
+    --#{$prefix}spinner-width: #{$spinner-width};
+    --#{$prefix}spinner-height: #{$spinner-height};
+    --#{$prefix}spinner-vertical-align: #{$spinner-vertical-align};
+    --#{$prefix}spinner-border-width: #{$spinner-border-width};
+    --#{$prefix}spinner-animation-speed: #{$spinner-animation-speed};
+    --#{$prefix}spinner-animation-name: spinner-border;
+
+    border: var(--#{$prefix}spinner-border-width) solid currentcolor;
+    border-right-color: transparent;
+}
+
+.spinner-border-sm {
+    /* spinner-border-sm-css-vars */
+    --#{$prefix}spinner-width: #{$spinner-width-sm};
+    --#{$prefix}spinner-height: #{$spinner-height-sm};
+    --#{$prefix}spinner-border-width: #{$spinner-border-width-sm};
+}
+
+/* Growing circle */
+
+/* spinner-grow-keyframes */
+@keyframes spinner-grow {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+.spinner-grow {
+    /* spinner-grow-css-vars */
+    --#{$prefix}spinner-width: #{$spinner-width};
+    --#{$prefix}spinner-height: #{$spinner-height};
+    --#{$prefix}spinner-vertical-align: #{$spinner-vertical-align};
+    --#{$prefix}spinner-animation-speed: #{$spinner-animation-speed};
+    --#{$prefix}spinner-animation-name: spinner-grow;
+
+    opacity: 0;
+    background-color: currentcolor;
+}
+
+.spinner-grow-sm {
+    --#{$prefix}spinner-width: #{$spinner-width-sm};
+    --#{$prefix}spinner-height: #{$spinner-height-sm};
+}
+
+@if $enable-reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+        .spinner-border,
+        .spinner-grow {
+            --#{$prefix}spinner-animation-speed: #{$spinner-animation-speed * 2};
+        }
+    }
+}

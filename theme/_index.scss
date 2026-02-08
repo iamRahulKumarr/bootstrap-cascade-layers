@@ -3,5 +3,7 @@
 @layer bootstrap, theme;
 
 @layer bootstrap {
-    @include meta.load-css("../src/sass/index");
+    /* @include meta.load-css("../src/sass/index"); */
 }
+
+@import "../src/sass/index";
